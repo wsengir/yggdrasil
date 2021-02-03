@@ -1,0 +1,16 @@
+#cloud-config
+hostname: yggdrasil
+ssh_authorized_keys:
+  - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIGz+YVr9ZAU3cGK08R1YcfWwToTu2yVm0KaSkDlwg78
+rancher:
+  console: default
+  services:
+    portainer:
+      image: portainer/portainer-ce
+      restart: always
+      ports:
+        - 8000:8000
+        - 9000:9000
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+        - portainer_data:/data
